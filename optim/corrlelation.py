@@ -26,10 +26,6 @@ def loss_func(args,node,nei,rec_x,rec_adj,feature,adj,mask,MINE,MINE_prime, mu, 
     
     # 使用一个较小的权重来平衡evidential_loss
     total_loss = rec_loss +  0.0001 * evidential_loss + 0.001 * corr_loss
-    print("total_loss: ",total_loss)
-    print("evidential_loss: ",evidential_loss)
-    
-    print('rec_loss:',rec_loss.item(),'corr_loss:',corr_loss.item(),'evidential_loss:',evidential_loss.item())
     return corr_loss, total_loss, evidential_loss
 
 def anomaly_score(args,z1,z2,rec_x,rec_adj,feature,adj,mask,MINE,mu,v,alpha_evidential,beta,pred):
@@ -63,13 +59,10 @@ def anomaly_score(args,z1,z2,rec_x,rec_adj,feature,adj,mask,MINE,mu,v,alpha_evid
     uncertainty = torch.where(torch.isinf(uncertainty), torch.ones_like(uncertainty), uncertainty)
     
     scores = F.mse_loss(z1[mask], z2[mask], reduction='none').mean(1) * rec + 0.005 * uncertainty.mean(1)
-    print("score_part1: ",F.mse_loss(z1[mask], z2[mask], reduction='none').mean(1) * rec)
-    print("uncertainty: ",uncertainty)
     # 检查并处理NaN值
     scores = torch.where(torch.isnan(scores), torch.zeros_like(scores), scores)
     scores = torch.where(torch.isinf(scores), torch.ones_like(scores) * scores.max(), scores)
     
-    print('rec:',rec.mean(),'uncertainty:',uncertainty.mean())
 
     return scores
 

@@ -1,6 +1,6 @@
 # GEL
 
-This repository is the official implementation of GEL.
+This repository is the fork implementation of GEL.
 
 ## Abstract
 
@@ -10,8 +10,12 @@ Detecting anomalies in graph-structured data is challenging due to the limited a
 
 To install requirements:
 
-```setup
-conda env create -f environment.yml
+```bash
+uv venv -p 3.12
+uv pip install torch==2.4.0 scikit-learn torch_geometric --torch-backend=cpu
+uv pip install dgl==2.4.0 -f https://data.dgl.ai/wheels/torch-2.4/repo.html
+uv pip install edl-pytorch thop
+#conda env create -f environment.yml
 ```
 
 ## Running the experiments

@@ -41,7 +41,7 @@ def build_args():
     register_data_args(parser)
     parser.add_argument("--dropout", type=float, default=0.1,
                         help="dropout probability")
-    parser.add_argument("--gpu", type=int, default =0,
+    parser.add_argument("--gpu", type=int, default =-1,
                         help="gpu")
     parser.add_argument("--correlation", type=str, default='CCA',
                         help="CCA/Partial/pearson/Erdist/CCAPartial/mic/Mutinf")

@@ -16,7 +16,7 @@ class LoadAnomaly(Dataset):
         labels = np.squeeze(labels)
         adj_ = adj + adj.T.multiply(adj.T > adj) - adj.multiply(adj.T > adj)
         adj_ =adj_ + sp.eye(adj_.shape[0])
-        self.graph = nx.from_scipy_sparse_matrix(adj_, create_using=nx.DiGraph())
+        self.graph = nx.from_scipy_sparse_array(adj_, create_using=nx.DiGraph())
         num_nodes = adj.shape[0]
         adj_label = adj + sp.eye(adj.shape[0])
         adj_label = sparse_to_tuple(adj_label)

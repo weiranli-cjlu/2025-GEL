@@ -50,7 +50,7 @@ def loader_anomaly(args):
                          (idx, idx)),
                         shape=(labels.shape[0], labels.shape[0]),
                         dtype=np.float32)
-    g_cnn = nx.from_scipy_sparse_matrix(adj_, create_using=nx.DiGraph())
+    g_cnn = nx.from_scipy_sparse_array(adj_, create_using=nx.DiGraph())
     # add self loop
     if args.self_loop:
         g.remove_edges_from(nx.selfloop_edges(g))
